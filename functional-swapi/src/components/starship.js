@@ -1,43 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
 
-const Starship = ({ match }) => {
+const Starship = ({ location }) => {
+    console.log(location.state.name)
 
-    const [ship, setShips] = useState()
-
-    useEffect(() => {
-        const fetchStarships = async () => {
-            const url = "https://swapi.dev/api/starships/"
-            const response = await axios.get(url)
-            const data = await response.data.results
-            setShips(data)
-        }
-        fetchStarships()
-    }, [])
-
-    const id = req.params.id
-
-    console.log(ship[id])
-    console.log(match.params.id)
-
-    
-
-    return (
+    return(
         <>
-
-            <div>
-                <h1>{ship[id].name}</h1>
-                <h1>{ship[id].model}</h1>
-                <Link to={'/'}>Return</Link>
-            </div>
-
+            <p>Name: {location.state.name}</p>
+            <p>Model: {location.state.model}</p>
+            <Link to='/'>Return</Link>
         </>
-
     )
-    
-
 }
 
 export default Starship
