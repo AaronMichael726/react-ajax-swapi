@@ -18,9 +18,8 @@ const Home = (props) => {
     })
 
     return (
-        <div>
-            <h1>starships component</h1>
-            {starshipLinks}
+        <div className="links">
+            {starshipLinks.length ? starshipLinks: <p>Loading...</p>}
         </div>
     );
     }
