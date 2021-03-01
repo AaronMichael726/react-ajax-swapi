@@ -4,6 +4,7 @@ import Home from './components/home'
 import Starship from './components/starship'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import './App.css'
 
 const App = (props) => {
 
