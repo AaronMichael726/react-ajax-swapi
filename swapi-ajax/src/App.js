@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class FetchStarships extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            loading: true,
+            starships: []
+        }
+    }
+    
+    async componentDidMount() {
+        const url = "https://swapi.dev/api/starships/"
+        const response = await fetch(url)
+        const data = await response.json()
+        this.setState({ starships: data.results, loading: false})
+    }
+
+    
+
+    render(){
+        if(this.state.loading){
+            return <div>loading...</div>
+        }
+
+        if (!this.state.starships.length){
+            return <div>didn't get a starship</div>
+        }
+
+        console.log(this.state.starships[0].name)
+        console.log(typeof this.state.starships)
+
+        return(
+            <>
+                <header>star wars starships</header>
+                {this.state.starships.map((i, idx) => (
+                    <button key={idx}>{i.name}</button>
+                ))}
+            </>
+        )
+    }
+
 }
-
-export default App;
